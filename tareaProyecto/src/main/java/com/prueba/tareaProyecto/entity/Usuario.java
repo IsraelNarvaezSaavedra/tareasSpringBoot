@@ -1,9 +1,14 @@
 package com.prueba.tareaProyecto.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +19,17 @@ public class Usuario {
 	private long id;
 	
 	private String nombre;
+	
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true )
+	private List<Curriculum> curriculums = new ArrayList<>();
+
+	public List<Curriculum> getCurriculums() {
+		return curriculums;
+	}
+
+	public void setCurriculums(List<Curriculum> curriculums) {
+		this.curriculums = curriculums;
+	}
 
 	public long getId() {
 		return id;
