@@ -25,8 +25,8 @@ public class Curriculum {
 	private Date fechaCreacion;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="usuario")
-	private Usuarios usuario;
+	@JoinColumn(name="nombre")
+	private Usuario usuario;
 	
 	public long getId() {
 		return id;
@@ -52,5 +52,12 @@ public class Curriculum {
 		this.fechaCreacion = fechaCreacion;
 	}
 	
+    public Usuario getUsuario() {
+        return usuario;
+    }
+	
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 	
 }
