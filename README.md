@@ -1,11 +1,11 @@
 # CRUD MVC con Thymeleaf — RA3
 
 ## 1) Datos del alumno/a
-- Entidad elegida (ej. Producto, Libro...):
+- Curriculum
 
 ## 2) Repositorio (fork) y gestión de versiones
 - Repositorio base: https://github.com/profeInformatica101/tareasSpringBoot
-- Enlace a MI fork: [PON AQUÍ EL ENLACE CUANDO LO CREES]
+- Enlace a MI fork: https://github.com/IsraelNarvaezSaavedra/tareasSpringBoot.git
 - Nº de commits realizados: (mínimo 5)
 
 ## 3) Arquitectura
@@ -16,13 +16,17 @@ Explica brevemente cómo has organizado:
 - Entity:
 
 ## 4) Base de datos elegida (marca una)
-- [ ] H2
+- [x] H2
 - [ ] MySQL
 - [ ] PostgreSQL
 
 ## 5) Configuración de la base de datos
 ### 5.1 Dependencias añadidas
-(Indica la dependencia del driver que has usado)
+-H2 Database
+-Spring Web
+-Spring Data JPA 
+-Thymeleaf 
+-Spring Boot DevTools
 
 ### 5.2 application.properties / application.yml
 (Pega aquí tu configuración SIN contraseñas reales si es necesario)
