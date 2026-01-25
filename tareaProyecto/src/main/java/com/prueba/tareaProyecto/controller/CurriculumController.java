@@ -1,0 +1,57 @@
+package com.prueba.tareaProyecto.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.prueba.tareaProyecto.entity.Curriculum;
+import com.prueba.tareaProyecto.service.CurriculumService;
+
+@Controller
+public class CurriculumController {
+
+	
+	@Autowired
+	private CurriculumService curriculumService;
+	
+	@GetMapping("/index")
+	public String listarCurriculum(Model model) {
+		List<Curriculum> curriculums = curriculumService.listarTodos();
+		model.addAttribute("curriculums",curriculums);
+		System.out.println(curriculums);
+		return "index";
+	}
+	
+    @GetMapping("/editar/{id}")
+    public String editarCorriculum(@PathVariable("id") Long id, Model model) {
+        Curriculum curriculum = curriculumService.obtenerPorIdOExcepcion(id);
+        if (curriculum == null) {
+            return "redirect:/index";
+        }
+        model.addAttribute("curriculum", curriculum);
+        return "editar";  
+    }
+    
+    @PostMapping("/editar")
+    public String guardarEdicion(@ModelAttribute Curriculum curriculum) {
+
+    	Long idDelCurriculum = curriculum.getId(); 
+        Curriculum curriculumOriginal = curriculumService.obtenerPorIdOExcepcion(idDelCurriculum);
+        curriculumOriginal.setContenido(curriculum.getContenido());
+        curriculumService.guardarCurriculum(curriculumOriginal);
+        return "redirect:/index";
+    }
+
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarCurriculum(@PathVariable("id") Long id) {
+        curriculumService.eliminarPorId(id);
+        return "redirect:/index";  
+    }
+}

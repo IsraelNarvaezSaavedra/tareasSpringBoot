@@ -21,11 +21,13 @@ public class Curriculum {
 	
 	private String url;
 	
+	private String contenido;
+	
 	@Column(name="fechas_creacion")
 	private Date fechaCreacion;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="nombre")
+	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
 	public long getId() {
@@ -59,5 +61,21 @@ public class Curriculum {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    
+	public String getContenido() {
+		return contenido;
+	}
+
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Curriculum [id=" + id + ", url=" + url + ", fechaCreacion=" + fechaCreacion + "]";
+	}
+    
+    
 	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,10 +15,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="usuarios")
 public class Usuario {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
+	@Column(name="nombre")
 	private String nombre;
 	
 	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true )
@@ -47,4 +50,8 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + "]";
+	}
 }

@@ -1,5 +1,5 @@
-package com.Prueba.tareaProyecto.configuration;
-
+package com.prueba.tareaProyecto.configuration;
+import com.github.javafaker.Faker;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,12 @@ import com.prueba.tareaProyecto.repository.UsuarioRepository;
 import com.prueba.tareaProyecto.service.CurriculumService;
 import com.prueba.tareaProyecto.service.UsuarioService;
 
+import jakarta.annotation.PostConstruct;
+
 @Component
 public class InicializarDatos implements CommandLineRunner{
 
     private final CurriculumService curriculumService;
-
 
 
 	 @Autowired
@@ -48,30 +49,17 @@ public class InicializarDatos implements CommandLineRunner{
 	            usuario.setNombre(faker.name().firstName());
 	            usuarios.add(usuario);
 	            usuarioService.guardarUsuario(usuario);
-	            // Para cada usuario, crea de 1 a 3 curriculums
 	            
+	            // Para cada usuario, crea de 1 a 3 curriculums
 	            Date desde = new Date(1900, 0, 1); 
 	            Date hasta = new Date(2010, 0, 1);
 	            Curriculum curriculum = new Curriculum();
                 curriculum.setUrl(faker.internet().url());
+                curriculum.setContenido(faker.chuckNorris().fact());
                 curriculum.setUsuario(usuario);
                 curriculum.setFechaCreacion( faker.date().between(desde, hasta));
                 usuario.getCurriculums().add(curriculum);
                 curriculumService.guardarCurriculum(curriculum);
-                //curriculumRepository.save(curriculum);
-	            /*
-	            int numCurriculums = faker.number().numberBetween(1, 4);
-	            for (int j = 0; j < numCurriculums; j++) {
-	                Curriculum curriculum = new Curriculum();
-	                curriculum.setUrl(faker.internet().url());
-	                curriculum.setUsuario(usuario);
-	                curriculum.setFechaCreacion( faker.date().between(desde, hasta));
-	                usuario.getCurriculums().add(curriculum);
-	                curriculumRepository.save(curriculum);
-	            }
-	            */
 	        }
-
-	        //usuarioService.saveAll(usuarios);
 	}
 }

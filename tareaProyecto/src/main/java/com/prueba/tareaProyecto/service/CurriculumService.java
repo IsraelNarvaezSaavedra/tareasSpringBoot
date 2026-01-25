@@ -22,9 +22,11 @@ public class CurriculumService {
     public List<Curriculum> listarTodos() {
         return curriculumRepository.findAll();
     }
-
-    public Optional<Curriculum> obtenerPorId(Long id) {
-        return curriculumRepository.findById(id);
+    
+    //Esta funcion es asi porque devuelve un optional y no un curriculum directo, es necesario el orElseThrow para que funcione
+    public Curriculum obtenerPorIdOExcepcion(Long id) {
+        return curriculumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Curriculum no encontrado con ID: " + id));
     }
 
     public Curriculum guardarCurriculum(Curriculum curriculum) {
@@ -33,5 +35,8 @@ public class CurriculumService {
     
     public void eliminarCurriculum(Long id) {
     	curriculumRepository.deleteById(id);
+    }
+    public void eliminarPorId(Long id) {
+        curriculumRepository.deleteById(id);
     }
 }

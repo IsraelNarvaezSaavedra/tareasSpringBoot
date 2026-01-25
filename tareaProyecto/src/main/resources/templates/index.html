@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD</title>
+</head>
+
+<body>
+     
+    <table border="1">
+        <th>Id_Curriculum</th>
+        <th>URL</th>
+		<th>Contenido</th>
+        <th>Fecha_Creacion</th>
+        <th>Usuario</th>
+        <th>Opciones</th>
+        <tr th:each="curriculum : ${curriculums}">
+            <td th:text="${curriculum.id}"></td>
+            <td th:text="${curriculum.url}"></td>
+			<td th:text="${curriculum.contenido}"></td>
+            <td th:text="${curriculum.fechaCreacion}"></td>
+            <td th:text="${curriculum.usuario?.getNombre()} ?: 'Sin usuario'"></td>
+            <td><a th:href="@{/editar/{id}(id=${curriculum.id})}">Editar</a> <a th:href="@{/eliminar/{id}(id=${curriculum.id})}" style="color: red;">Eliminar</a>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
