@@ -20,12 +20,26 @@ public class CurriculumController {
 	@Autowired
 	private CurriculumService curriculumService;
 	
-	@GetMapping("/index")
+	@GetMapping("/galeria")
+	public String mostrarGaleria(Model model) {
+		List<Curriculum> curriculums = curriculumService.listarTodos();
+		model.addAttribute("curriculums", curriculums);
+		return "galeria";
+	}
+	
+	@GetMapping("/ver/{id}")
+	public String verCurriculum(@PathVariable("id") Long id, Model model) {
+		Curriculum curriculum = curriculumService.obtenerPorIdOExcepcion(id);
+		model.addAttribute("curriculum", curriculum);
+		return "ver";
+	}
+	
+	@GetMapping("/administracion")
 	public String listarCurriculum(Model model) {
 		List<Curriculum> curriculums = curriculumService.listarTodos();
 		model.addAttribute("curriculums",curriculums);
 		System.out.println(curriculums);
-		return "index";
+		return "administracion";
 	}
 	
     @GetMapping("/editar/{id}")
@@ -45,13 +59,13 @@ public class CurriculumController {
         Curriculum curriculumOriginal = curriculumService.obtenerPorIdOExcepcion(idDelCurriculum);
         curriculumOriginal.setContenido(curriculum.getContenido());
         curriculumService.guardarCurriculum(curriculumOriginal);
-        return "redirect:/index";
+        return "redirect:/administracion";
     }
 
 
     @GetMapping("/eliminar/{id}")
     public String eliminarCurriculum(@PathVariable("id") Long id) {
         curriculumService.eliminarPorId(id);
-        return "redirect:/index";  
+        return "redirect:/administracion";  
     }
 }

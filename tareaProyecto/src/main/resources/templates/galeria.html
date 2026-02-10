@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Currículums</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+          crossorigin="anonymous">
+    
+    <!-- Opcional: íconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        .curriculum-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+        .curriculum-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: 500;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-text {
+            flex-grow: 1;
+        }
+        .btn-sm {
+            font-size: 0.85rem;
+        }
+        .text-truncate-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2 mb-0">Galería de Currículums</h1>
+        </div>
+
+        <!-- Mensaje si no hay currículums -->
+        <div th:if="${#lists.isEmpty(curriculums)}" class="alert alert-info text-center py-5">
+            <h4>Aún no hay currículums cargados</h4>
+        </div>
+
+        <!-- Galería de tarjetas -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" th:unless="${#lists.isEmpty(curriculums)}">
+            
+            <div class="col" th:each="curriculum : ${curriculums}">
+                <div class="card curriculum-card shadow-sm border-0">
+                                        
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${curriculum.usuario?.getNombre()} ?: 'Sin usuario'"></h5>
+                        
+                        <p class="card-text text-truncate-3 mb-3" 
+                           th:text="${curriculum.contenido} ?: 'Sin descripción'">
+                            <!-- Contenido del CV -->
+                        </p>
+                        
+						<a th:href="@{/ver/{id}(id=${curriculum.id})}"> Ver Detalles</a>
+                    </div>
+					
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <!-- Bootstrap 5 JS (opcional, solo si necesitas componentes que lo requieran) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+            crossorigin="anonymous"></script>
+</body>
+</html>
