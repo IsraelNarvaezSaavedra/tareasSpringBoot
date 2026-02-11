@@ -20,7 +20,16 @@ public class CurriculumController {
 	@Autowired
 	private CurriculumService curriculumService;
 	
-	@GetMapping("/galeria")
+	@GetMapping("/login")
+	public String showLogin() {
+		return "login";
+}
+@GetMapping("/logout")
+	public String showIndex() {
+		return "logout";
+}
+	
+	@GetMapping({"/", "/galeria", "/index"})
 	public String mostrarGaleria(Model model) {
 		List<Curriculum> curriculums = curriculumService.listarTodos();
 		model.addAttribute("curriculums", curriculums);

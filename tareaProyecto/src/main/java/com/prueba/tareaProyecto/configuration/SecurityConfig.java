@@ -31,7 +31,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-            .requestMatchers("/galeria").permitAll()
+            .requestMatchers("/galeria", "/", "/").permitAll()
+            .requestMatchers("/ver").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/ver/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers(PathRequest.toH2Console()).hasRole("ADMIN")
             .requestMatchers("/h2-console/**", "/h2/**").hasRole("ADMIN")
@@ -45,7 +46,7 @@ public class SecurityConfig {
         );
 
         http.formLogin(form -> form
-            .defaultSuccessUrl("/galeria", true)
+            .defaultSuccessUrl("/index", true)
             .permitAll()
         );
 
