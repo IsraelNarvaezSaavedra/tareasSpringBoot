@@ -43,7 +43,7 @@ public class InicializarDatos implements CommandLineRunner{
 	        List<Usuario> usuarios = new ArrayList<>();
 
 	        // Crear 10 usuarios
-	        for (int i = 0; i < 10; i++) {
+	        for (int i = 0; i < 30; i++) {
 	        	Usuario usuario = new Usuario();
 	            usuario.setNombre(faker.name().firstName());
 	            usuarios.add(usuario);
