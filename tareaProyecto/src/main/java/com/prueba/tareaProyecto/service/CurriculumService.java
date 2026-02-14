@@ -1,42 +1,13 @@
 package com.prueba.tareaProyecto.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.prueba.tareaProyecto.entity.Curriculum;
-import com.prueba.tareaProyecto.repository.CurriculumRepository;
 
-
-@Service
-public class CurriculumService {
-	private final CurriculumRepository curriculumRepository;
-	
-	@Autowired
-	public CurriculumService(CurriculumRepository curriculumRepository) {
-		this.curriculumRepository = curriculumRepository;
-	}
-	
-    public List<Curriculum> listarTodos() {
-        return curriculumRepository.findAll();
-    }
-    
-    //Esta funcion es asi porque devuelve un optional y no un curriculum directo, es necesario el orElseThrow para que funcione
-    public Curriculum obtenerPorIdOExcepcion(Long id) {
-        return curriculumRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Curriculum no encontrado con ID: " + id));
-    }
-
-    public Curriculum guardarCurriculum(Curriculum curriculum) {
-        return curriculumRepository.save(curriculum);
-    }
-    
-    public void eliminarCurriculum(Long id) {
-    	curriculumRepository.deleteById(id);
-    }
-    public void eliminarPorId(Long id) {
-        curriculumRepository.deleteById(id);
-    }
+public interface CurriculumService {
+	List<Curriculum> listarTodos();
+	Curriculum obtenerPorIdOExcepcion(Long id);
+	Curriculum guardarCurriculum(Curriculum curriculum);
+	void eliminarCurriculum(Long id);
+	void eliminarPorId(Long id);
 }

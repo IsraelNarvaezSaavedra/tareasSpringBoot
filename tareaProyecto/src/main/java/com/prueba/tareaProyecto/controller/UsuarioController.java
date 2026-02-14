@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.prueba.tareaProyecto.entity.Usuario;
-import com.prueba.tareaProyecto.service.UsuarioService;
+import com.prueba.tareaProyecto.service.impl.UsuarioServiceImpl;
 
 @Controller
 @RequestMapping("/urls")
 public class UsuarioController {
 	
 	@Autowired
-	private UsuarioService usuarioService;
+	private UsuarioServiceImpl usuarioService;
 	
 	@GetMapping
 	public String listarUsuarios(Model model) {

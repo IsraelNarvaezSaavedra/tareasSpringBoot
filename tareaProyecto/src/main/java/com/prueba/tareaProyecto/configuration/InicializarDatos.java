@@ -12,15 +12,15 @@ import com.prueba.tareaProyecto.entity.Curriculum;
 import com.prueba.tareaProyecto.entity.Usuario;
 import com.prueba.tareaProyecto.repository.CurriculumRepository;
 import com.prueba.tareaProyecto.repository.UsuarioRepository;
-import com.prueba.tareaProyecto.service.CurriculumService;
-import com.prueba.tareaProyecto.service.UsuarioService;
+import com.prueba.tareaProyecto.service.impl.CurriculumServiceImpl;
+import com.prueba.tareaProyecto.service.impl.UsuarioServiceImpl;
 
 import jakarta.annotation.PostConstruct;
 
 @Component
 public class InicializarDatos implements CommandLineRunner{
 
-    private final CurriculumService curriculumService;
+    private final CurriculumServiceImpl curriculumService;
 
 
 	 @Autowired
@@ -30,9 +30,9 @@ public class InicializarDatos implements CommandLineRunner{
 	    private UsuarioRepository usuarioRepository;
 	    
 	    @Autowired
-	    private UsuarioService usuarioService;
+	    private UsuarioServiceImpl usuarioService;
 
-    InicializarDatos(CurriculumService curriculumService) {
+    InicializarDatos(CurriculumServiceImpl curriculumService) {
         this.curriculumService = curriculumService;
     }
 

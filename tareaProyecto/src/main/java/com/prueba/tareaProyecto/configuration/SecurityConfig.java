@@ -51,6 +51,8 @@ public class SecurityConfig {
         );
 
         http.logout(logout -> logout
+        	.logoutUrl("/logout")
+        	.logoutSuccessUrl("/galeria")
             .permitAll()
         );
 
@@ -62,7 +64,7 @@ public class SecurityConfig {
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
